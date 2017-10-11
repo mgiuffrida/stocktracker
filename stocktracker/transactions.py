@@ -55,6 +55,18 @@ class Transaction(object):
     def __repr__(self):
         raise NotImplementedError
 
+    def __cmp__(self, other):
+        if self.date != other.date:
+            return cmp(self.date, other.date)
+
+        # Compare properties.
+        data_cmp = cmp(self.__dict__, other.__dict__)
+        if data_cmp:
+            return data_cmp
+
+        # Compare by identity.
+        return cmp(id(self), id(other))
+
 
 class Dividend(Transaction):
     """A dividend transaction."""
@@ -239,3 +251,25 @@ class SecurityTransfer(Transaction):
         """Creates a SecurityTransfer transaction from a dictionary."""
         return SecurityTransfer(utility.from_js_date(data['date']),
                                 data['symbol'], Decimal(data['quantity']))
+
+
+class TransactionList(object):  # pylint: disable=too-few-public-methods
+    """Immutable list of transactions ordered by date."""
+
+    def __init__(self, transactions=None):
+        self._transactions = transactions or []
+
+    def __len__(self):
+        return len(self._transactions)
+
+    def __getitem__(self, key):
+        return self._transactions[key]
+
+    def __delitem__(self, key):
+        del self._transactions[key]
+
+    def __iter__(self):
+        return iter(self._transactions)
+
+    def __contains__(self, item):
+        return item in self._transactions
