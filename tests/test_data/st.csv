@@ -1,0 +1,11 @@
+date,type,total,symbol,quantity,price,fees,is_qualified,is_long_term
+2008-01-01,Transfer,$400.00,,,,,,
+2008-01-31,Interest,$0.02,,,,,,
+2008-02-01,Interest,$0.01,,,,,,
+2008-03-19,Buy,$35.91,FOO,21,1.2345,9.99,,
+2008-04-01,Sell,$34.46,FOO,19,2.34,10.00,,
+2008-05-03,Dividend,$0.12,FOO,,,,False,
+2008-05-03,Dividend,$0.80,FOO,,,,True,
+2008-05-03,CapGain,$5.43,FOO,,,,,True
+2008-09-15,SecurityTransfer,,FOO,-2,,,,
+2008-12-31,Transfer,$-400.00,,,,,,

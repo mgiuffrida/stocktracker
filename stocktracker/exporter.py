@@ -29,27 +29,28 @@ class Exporter(object):
         raise NotImplementedError
 
 
+csv_cols = (
+    'date', 'type',
+    # Monetary-related transactions.
+    'total',
+    # Equity-related transactions.
+    'symbol',
+    # Trades and equity transfers.
+    'quantity',
+    # Trades.
+    'price', 'fees',
+    # Dividends.
+    'is_qualified',
+    # Capital gains.
+    'is_long_term',
+)
+
+
 class CSVExporter(Exporter):
     """Exports to CSV format."""
 
-    _cols = (
-        'date', 'type',
-        # Monetary-related transactions.
-        'total',
-        # Equity-related transactions.
-        'symbol',
-        # Trades and equity transfers.
-        'quantity',
-        # Trades.
-        'price', 'fees',
-        # Dividends.
-        'is_qualified',
-        # Capital gains.
-        'is_long_term',
-    )
-
     def export_to_file(self, dest, txn_list):
-        writer = csv.DictWriter(dest, self._cols)
+        writer = csv.DictWriter(dest, csv_cols)
         writer.writeheader()
 
         for txn in txn_list:

@@ -33,7 +33,7 @@ def parse(num):
     """
     parsed = num.strip().replace(',', '')
     if not parsed:
-        return 0
+        raise ValueError
     sign = 1
     while True:
         if parsed[0] == '-':
