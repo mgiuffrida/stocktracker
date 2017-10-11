@@ -1,0 +1,10 @@
+[MASTER]
+# Don't save stats.
+persistent = no
+
+[MISCELLANEOUS]
+# Ignore TODO, etc.
+notes=
+
+[MESSAGES CONTROL]
+disable=no-self-use

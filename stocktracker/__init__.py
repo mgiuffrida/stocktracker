@@ -1,4 +1,3 @@
 """Main module."""
 
-def main():
-    pass
+import stocktracker.importer

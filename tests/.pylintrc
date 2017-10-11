@@ -1,0 +1,11 @@
+[MASTER]
+# Don't save stats.
+persistent = no
+
+[MISCELLANEOUS]
+# Ignore TODO, etc.
+notes=
+
+[MESSAGES CONTROL]
+# Relax requirements in tests.
+disable=missing-docstring,too-many-arguments

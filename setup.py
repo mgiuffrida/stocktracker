@@ -10,5 +10,11 @@ setup(
     author_email='michaelg@michaelg.us',
     url='https://github.com/mgiuffrida/stocktracker',
     license='MIT',
-    packages=['stocktracker']
+    packages=['stocktracker'],
+    extras_require={
+        'dev': [
+            'pep8',
+            'pylint',
+        ]
+    },
 )
