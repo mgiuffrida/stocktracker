@@ -207,9 +207,22 @@ def fix_up_transaction(num_shares, price, total, fees=None):
     return result
 
 
-def to_str(num):
-    """Prints a decimal number as a dollar amount."""
+def to_str(num, limit_precision=True, accounting_style=True):
+    """Prints a decimal number as a dollar amount.
+
+    limit_precision: whether to round to 2 decimal places (default true)
+    accounting_style: whether to use parens for negative values (default true)
+    """
+    if limit_precision:
+        num = round_decimal(num)
+
+    if not accounting_style:
+        return '$' + str(num)
+
     is_negative = num < 0
     if is_negative:
-        return '$(%.2f)' % round_decimal(-num, 2)
-    return '$%.2f' % round_decimal(num, 2)
+        num *= -1
+
+    if is_negative:
+        return '$(%s)' % num
+    return '$%s' % num
