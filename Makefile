@@ -1,4 +1,8 @@
-all: test pep8 lint-full-quiet
+all: test pep8 lint
+
+source_pyfiles = stocktracker/*.py
+test_pyfiles = tests/*.py
+all_pyfiles = $(source_pyfiles) $(test_pyfiles)
 
 init:
 	pip install -r requirements.txt
@@ -6,19 +10,15 @@ init:
 test:
 	python -m unittest discover
 
-lint:
-	pylint -E stocktracker/*.py tests/*.py
-
 pep8:
-	pep8 stocktracker/*.py tests/*.py
+	pep8 $(all_pyfiles)
 
-lint-full:
-	pylint stocktracker/*.py
-	pylint --rcfile=tests/.pylintrc tests/*.py
+lint:
+	pylint --score=no $(source_pyfiles)
+	pylint --score=no --rcfile=tests/.pylintrc $(test_pyfiles)
 
-lint-full-quiet:
-	pylint --score=no stocktracker/*.py
-	pylint --score=no --rcfile=tests/.pylintrc tests/*.py
+lint-quiet:
+	pylint -E $(all_pyfiles)
 
 clean:
-	rm **/*.pyc
+	rm */*.pyc
