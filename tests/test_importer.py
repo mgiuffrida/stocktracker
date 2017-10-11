@@ -4,11 +4,11 @@
 Tests for importer module.
 """
 
+from decimal import Decimal as D
 import datetime
 import unittest
-from decimal import Decimal as D
 
-from stocktracker import importer
+from stocktracker import importers
 from stocktracker import transactions
 
 
@@ -28,7 +28,7 @@ class TestTDAmeritradeImporter(unittest.TestCase):
         self.assertDictEqual(lhs.__dict__, rhs.__dict__, msg)
 
     def test_import(self):
-        td_importer = importer.TDAmeritradeImporter(
+        td_importer = importers.TDAmeritradeImporter(
             'tests/test_data/td_ameritrade.csv')
         td_importer.do_import()
         self.assertEqual(len(td_importer.transactions), 10)

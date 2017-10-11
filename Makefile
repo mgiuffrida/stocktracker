@@ -1,6 +1,6 @@
-all: test pep8 lint
+all: test lint pep8
 
-source_pyfiles = stocktracker/*.py
+source_pyfiles = stocktracker/**/*.py
 test_pyfiles = tests/*.py
 all_pyfiles = $(source_pyfiles) $(test_pyfiles)
 
