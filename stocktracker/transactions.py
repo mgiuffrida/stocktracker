@@ -44,6 +44,14 @@ class Transaction(object):
         assert key in Transaction._keys
         return Transaction._keys[key]
 
+    def __init__(self, date):
+        self._date = date
+
+    @property
+    def date(self):
+        """Gets the date of the transaction."""
+        return self._date
+
     def __repr__(self):
         raise NotImplementedError
 
@@ -52,7 +60,7 @@ class Dividend(Transaction):
     """A dividend transaction."""
     # pylint: disable=too-many-arguments
     def __init__(self, date, symbol, amount, qualified, reinvested):
-        self.date = date
+        Transaction.__init__(self, date)
         self.symbol = symbol
         self.amount = amount
         self.qualified = qualified
@@ -81,7 +89,7 @@ class CapGain(Transaction):
     """A capital gains transaction."""
     # pylint: disable=too-many-arguments
     def __init__(self, date, symbol, amount, long_term, reinvested):
-        self.date = date
+        Transaction.__init__(self, date)
         self.symbol = symbol
         self.amount = amount
         self.long_term = long_term
@@ -105,7 +113,7 @@ class CapGain(Transaction):
 class Liquidation(Transaction):
     """A security liquidation transaction."""
     def __init__(self, date, description, amount):
-        self.date = date
+        Transaction.__init__(self, date)
         self.description = description
         self.amount = amount
 
@@ -124,7 +132,7 @@ class Liquidation(Transaction):
 class Interest(Transaction):
     """An interest deposit transaction."""
     def __init__(self, date, amount):
-        self.date = date
+        Transaction.__init__(self, date)
         self.amount = amount
 
     def __repr__(self):
@@ -142,7 +150,7 @@ class Buy(Transaction):
     # pylint: disable=too-many-arguments
     def __init__(self, date, symbol, num_shares, price, fees, total,
                  is_reinvestment):
-        self.date = date
+        Transaction.__init__(self, date)
         self.symbol = symbol
         self.num_shares = num_shares
         self.price = price
@@ -172,7 +180,7 @@ class Sell(Transaction):
     """A sell transaction."""
     # pylint: disable=too-many-arguments
     def __init__(self, date, symbol, num_shares, price, fees, total):
-        self.date = date
+        Transaction.__init__(self, date)
         self.symbol = symbol
         self.num_shares = num_shares
         self.price = price
@@ -198,7 +206,7 @@ class Sell(Transaction):
 class Transfer(Transaction):
     """A cash transfer transaction."""
     def __init__(self, date, amount):
-        self.date = date
+        Transaction.__init__(self, date)
         self.amount = amount
 
     def __repr__(self):
@@ -217,7 +225,7 @@ class Transfer(Transaction):
 class SecurityTransfer(Transaction):
     """A security transfer transaction."""
     def __init__(self, date, symbol, num_shares):
-        self.date = date
+        Transaction.__init__(self, date)
         self.symbol = symbol
         self.num_shares = num_shares
 
